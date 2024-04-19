@@ -2,7 +2,7 @@
 
 namespace ConsoleApp1
 {
-    class Person
+    class Person   
     {
         public string last_name;
         public string name;
@@ -11,11 +11,31 @@ namespace ConsoleApp1
 
     class HR
     {
-        public Person [] array;
+        public Person [] array; //массив
 
         public void Sort(Person [] a)
         {
-            
+            Person k;
+            for (int j = 0; j < a.Length; j++)
+            {
+                for (int l=0;l<a.Length;l++)
+                    if (string.Compare(array[l].last_name, array[l + 1].last_name) > 0) //сравнение по первому свойству - фамилия
+                    {
+                        k = array[l];
+                        array[l] = array[l + 1];
+                        array[l + 1] = k;
+                    }
+                    else if (string.Compare(array[l].last_name, array[l + 1].last_name) == 0) //сравнение по второму свойству - имя
+                    {
+                        if (string.Compare(array[l].name, array[l + 1].name) > 0)
+                        {
+                            k = array[l];
+                            array[l] = array[l + 1];
+                            array[l + 1] = k;
+                        }
+                    }
+
+            }
         }
 
     }
