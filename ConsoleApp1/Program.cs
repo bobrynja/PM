@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace ConsoleApp1
 {
@@ -16,7 +17,7 @@ namespace ConsoleApp1
         public void Sort()
         {
             Person k;
-            for (int j = 0; j < array.Length; j++)
+            for (int j = 0; j < array.Length-1; j++)
             {
                 for (int l=0;l< array.Length-1;l++)
                     if (string.Compare(array[l].last_name, array[l + 1].last_name) > 0) //сравнение по первому свойству - фамилия
@@ -37,17 +38,20 @@ namespace ConsoleApp1
                     }
 
             }
-           //foreach(var i in array)
-            //{
-              //  Console.WriteLine(i.last_name + i.name);
-                
-            //}
-            //Console.WriteLine(array);
-            //Console.WriteLine(array);
             Console.ReadKey();
         }
+        public void Save()
+        {
+            StreamWriter sw = new StreamWriter("Person_list.txt");
+            foreach (var i in array)
+            {
+                sw.WriteLine(i.last_name+" "+i.name+" "+i.age);
 
-      
+            }
+            sw.Close();
+        }
+
+
 
     }
 
@@ -76,6 +80,7 @@ namespace ConsoleApp1
 
             }
             ar.Sort();
+            ar.Save();
 
         }
     }
