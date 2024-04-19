@@ -12,7 +12,7 @@ namespace ConsoleApp1
 
     class HR
     {
-        public Person [] array; //массив
+        public Person [] array; //массив 
 
         public void Sort()
         {
@@ -22,8 +22,7 @@ namespace ConsoleApp1
                 for (int l=0;l< array.Length-1;l++)
                     if (string.Compare(array[l].last_name, array[l + 1].last_name) > 0) //сравнение по первому свойству - фамилия
                     {
-                        //Console.WriteLine(array[l].last_name);
-                        k = array[l];
+                        k = array[l]; //меняем местами элементы массива
                         array[l] = array[l + 1];
                         array[l + 1] = k;
                     }
@@ -40,7 +39,7 @@ namespace ConsoleApp1
             }
             Console.ReadKey();
         }
-        public void Save()
+        public void Save() //сохранение отсортированного массива в файл (файл находится в папке ConsoleApp1\ConsoleApp1\bin\Debug\netcoreapp3.1)        
         {
             StreamWriter sw = new StreamWriter("Person_list.txt");
             foreach (var i in array)
@@ -63,24 +62,51 @@ namespace ConsoleApp1
             string last_name, name, age;
             HR ar = new HR(); 
             Console.WriteLine("Введите количество элементов массива: ");
-            int i = Convert.ToInt32(Console.ReadLine());
-            ar.array = new Person[i];
-            for(int j = 0; j < i; j++)
-            {
-                now = new Person();
-                Console.WriteLine($"Ввод {j} элемента: ");
-                Console.WriteLine("Введите фамилию: ");
-                now.last_name = Console.ReadLine();
-                Console.WriteLine("Введите имя: ");
-                now.name = Console.ReadLine();
-                Console.WriteLine("Введите возраст: ");
-                now.age = Console.ReadLine();
-                ar.array[j] = now;
+            try { 
+                int i = Convert.ToInt32(Console.ReadLine());
+                while (i <= 0)
+                {
+                    Console.WriteLine("Ошибка!!! Введите количество элементов: ");
+                    i = Convert.ToInt32(Console.ReadLine());
+                }
 
 
-            }
-            ar.Sort();
-            ar.Save();
+                ar.array = new Person[i];
+                for (int j = 0; j < i; j++)
+                {
+                    now = new Person();
+                    Console.WriteLine($"Ввод {j+1} элемента: ");
+                    Console.WriteLine("Введите фамилию: ");
+                    now.last_name = Console.ReadLine();
+                    Console.WriteLine("Введите имя: ");
+                    now.name = Console.ReadLine();
+                    Console.WriteLine("Введите возраст: ");
+                    age = Console.ReadLine();
+                    try
+                    {
+                        if (Convert.ToInt32(age) <= 0)
+                        {
+                           Console.WriteLine("Ошибка!!!");
+                              break;
+                        }
+                            now.age = age;
+                            ar.array[j] = now;
+                        }
+                        catch
+                        {
+                            Console.WriteLine("Ошибка!!!");
+                            System.Environment.Exit(0);
+                        }
+                        now.age = age;
+                        ar.array[j] = now;
+                    }
+                    ar.Sort();
+                    ar.Save();
+                   }
+                catch
+                {
+                Console.WriteLine("Ошибка!!!");
+                }
 
         }
     }
