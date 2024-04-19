@@ -13,14 +13,15 @@ namespace ConsoleApp1
     {
         public Person [] array; //массив
 
-        public void Sort(Person [] a)
+        public void Sort()
         {
             Person k;
-            for (int j = 0; j < a.Length; j++)
+            for (int j = 0; j < array.Length; j++)
             {
-                for (int l=0;l<a.Length;l++)
+                for (int l=0;l< array.Length-1;l++)
                     if (string.Compare(array[l].last_name, array[l + 1].last_name) > 0) //сравнение по первому свойству - фамилия
                     {
+                        //Console.WriteLine(array[l].last_name);
                         k = array[l];
                         array[l] = array[l + 1];
                         array[l + 1] = k;
@@ -36,7 +37,17 @@ namespace ConsoleApp1
                     }
 
             }
+           //foreach(var i in array)
+            //{
+              //  Console.WriteLine(i.last_name + i.name);
+                
+            //}
+            //Console.WriteLine(array);
+            //Console.WriteLine(array);
+            Console.ReadKey();
         }
+
+      
 
     }
 
@@ -53,7 +64,7 @@ namespace ConsoleApp1
             for(int j = 0; j < i; j++)
             {
                 now = new Person();
-                Console.WriteLine($"Ввод {i} элемента: ");
+                Console.WriteLine($"Ввод {j} элемента: ");
                 Console.WriteLine("Введите фамилию: ");
                 now.last_name = Console.ReadLine();
                 Console.WriteLine("Введите имя: ");
@@ -64,6 +75,7 @@ namespace ConsoleApp1
 
 
             }
+            ar.Sort();
 
         }
     }
